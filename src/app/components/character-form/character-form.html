@@ -1,0 +1,34 @@
+<form (ngSubmit)="handleSubmit()" class="bg-white rounded-lg shadow-md p-6 mb-6">
+  <h3 class="text-lg font-semibold mb-4">
+    Add New {{ type === 'hero' ? 'Hero' : 'Villain' }}
+  </h3>
+  <div class="flex flex-col sm:flex-row gap-3">
+    <input
+      type="text"
+      [(ngModel)]="name"
+      name="name"
+      [placeholder]="'Enter ' + type + ' name...'"
+      [class]="'flex-1 px-4 py-2 border-2 ' + borderColor + ' rounded-lg focus:outline-none focus:ring-2'"
+      required
+    />
+    <input
+      *ngIf="showPowerInput"
+      type="number"
+      [(ngModel)]="power"
+      name="power"
+      placeholder="Power (0-100)"
+      min="0"
+      max="100"
+      [class]="'w-32 px-4 py-2 border-2 ' + borderColor + ' rounded-lg focus:outline-none focus:ring-2'"
+    />
+    <button
+      type="submit"
+      [class]="bgColor + ' text-white px-6 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2 justify-center'"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+      </svg>
+      Add
+    </button>
+  </div>
+</form>

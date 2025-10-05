@@ -1,0 +1,40 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-4xl font-bold text-slate-800 mb-8">Heroes</h1>
+
+  <app-character-form
+    [type]="'hero'"
+    [showPowerInput]="true"
+    (submitForm)="addHero($event)"
+  ></app-character-form>
+
+  <div class="mb-6">
+    <div class="relative">
+      <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Search heroes by name or PGUID..."
+        class="w-full pl-10 pr-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      />
+    </div>
+  </div>
+
+  <div class="mb-4 text-slate-600">
+    Showing {{ filteredHeroes.length }} of {{ heroes.length }} heroes
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <app-hero-card
+      *ngFor="let hero of filteredHeroes"
+      [hero]="hero"
+      [showDelete]="true"
+      (delete)="deleteHero($event)"
+    ></app-hero-card>
+  </div>
+
+  <div *ngIf="filteredHeroes.length === 0" class="text-center py-12 text-slate-500">
+    {{ searchTerm ? 'No heroes found matching your search.' : 'No heroes yet. Add your first hero above!' }}
+  </div>
+</div>
